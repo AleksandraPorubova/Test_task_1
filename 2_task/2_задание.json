@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "eaa814a9-f399-45b0-a34a-6554ef73060c",
+		"name": "YouTube",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25457605"
+	},
+	"item": [
+		{
+			"name": "Позитивные",
+			"item": [
+				{
+					"name": "Получение списка видео",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}?key={{key}}&id={{id}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Лайк",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/rate?Accept=application/json&id={{id}}&rating=like",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"rate"
+							],
+							"query": [
+								{
+									"key": "Accept",
+									"value": "application/json"
+								},
+								{
+									"key": "id",
+									"value": "{{id}}"
+								},
+								{
+									"key": "rating",
+									"value": "like"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка популярных видео",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}?key={{key}}&chart=mostPopular",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "chart",
+									"value": "mostPopular"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Негативные",
+			"item": [
+				{
+					"name": "Получение списка видео без ключа",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}?id={{id}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка видео без Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}?key={{key}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "id",
+									"value": "{{id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Лайк без авторизации",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/rate?Accept=application/json&id={{id}}&rating=like",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"rate"
+							],
+							"query": [
+								{
+									"key": "Accept",
+									"value": "application/json"
+								},
+								{
+									"key": "id",
+									"value": "{{id}}"
+								},
+								{
+									"key": "rating",
+									"value": "like"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Лайк без рейтинга",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/rate?Accept=application/json&id={{id}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"rate"
+							],
+							"query": [
+								{
+									"key": "Accept",
+									"value": "application/json"
+								},
+								{
+									"key": "id",
+									"value": "{{id}}"
+								},
+								{
+									"key": "rating",
+									"value": "like",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка популярных видео без параметра chart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}?key={{key}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "chart",
+									"value": "mostPopular",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка популярных видео без ключа",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}?chart=mostPopular",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"disabled": true
+								},
+								{
+									"key": "chart",
+									"value": "mostPopular"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "key",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BaseURL",
+			"value": "https://www.googleapis.com/youtube/v3/videos",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "jifUJrYPZQQ",
+			"type": "string"
+		},
+		{
+			"key": "AccessToken",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
